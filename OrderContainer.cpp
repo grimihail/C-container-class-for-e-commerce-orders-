@@ -34,20 +34,10 @@ int OrderContainer::addOrder(const std::string& productId, const std::string& or
 
 	
 	if (deliveryType == deliveryType::normal) {
-		std::multimap<double, std::string>::iterator ret_mm;
-		ret_mm = normal_price_orderID_mmap.insert(std::pair<double, std::string>(price, orderId));
-		if (ret_mm == normal_price_orderID_mmap.end()) {
-			orderID_productID_map.erase(ret.first);
-			return -1;
-		}
+		normal_price_orderID_mmap.insert(std::pair<double, std::string>(price, orderId));
 	}
 	else {
-		std::multimap<double, std::string>::iterator ret_mm;
-		ret_mm = fast_price_orderID_mmap.insert(std::pair<double, std::string>(price, orderId));
-		if (ret_mm == fast_price_orderID_mmap.end()) {
-			orderID_productID_map.erase(ret.first);
-			return -1;
-		}
+		fast_price_orderID_mmap.insert(std::pair<double, std::string>(price, orderId));
 	}
 
 	return 0;
